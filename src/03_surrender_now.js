@@ -74,7 +74,26 @@ function filterByType(pokemon, type) {
     *  getPokemonNamesMostEffectiveAgainstType(pokemon, weaknesses, "copyright infringement");
  *  //> [];
  */
-function getPokemonNamesMostEffectiveAgainstType(pokemon, weaknesses, type) {};
+function getPokemonNamesMostEffectiveAgainstType(pokemon, weaknesses, type) {
+  let weakType = weaknesses[type];
+  let strongType = [];
+
+  if(!pokemon || pokemon.length === 0) {
+    return [];
+  };
+  if(!weakType) {
+    return `No Pokemon found of type: '${type}'.`;
+  };
+
+  for(let poke of pokemon) {
+    for(let pokeType of poke.type) {
+      if(weakType.includes(pokeType) && !strongType.includes(poke.name)) {
+        strongType.push(poke.name);
+      }
+    }
+  }
+  return strongType;
+};
 
 module.exports = {
     filterByType,
