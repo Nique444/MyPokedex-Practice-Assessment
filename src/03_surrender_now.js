@@ -35,7 +35,25 @@ const exampleWeaknesses = require("../data/weaknesses");
  *  filterByType(pokemon, "Shadow")
  *  //> [];
  */
-function filterByType() {}
+function filterByType(pokemon, type) {
+  if(pokemon.length === 0) {
+    return [];
+  }
+
+  let matchingTypes = [];
+
+  for(let poke of pokemon) {
+    for(let pokeType of poke.type) {
+      if(!type){
+        type = 'Normal'
+      }
+      if(pokeType.toLowerCase() === type.toLowerCase()) {
+        matchingTypes.push(poke)
+      }
+    }
+  }
+  return matchingTypes;
+};
 
 /**
  * getPokemonNamesMostEffectiveAgainstType()
@@ -56,7 +74,7 @@ function filterByType() {}
     *  getPokemonNamesMostEffectiveAgainstType(pokemon, weaknesses, "copyright infringement");
  *  //> [];
  */
-function getPokemonNamesMostEffectiveAgainstType() {}
+function getPokemonNamesMostEffectiveAgainstType(pokemon, weaknesses, type) {};
 
 module.exports = {
     filterByType,

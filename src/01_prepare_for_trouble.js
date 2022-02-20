@@ -37,7 +37,13 @@ const examplePokemon = require("../data/poke");
   'Dratini',    'Dragonair',  'Dragonite',  'Mewtwo'
 ];
  */
-function getAllPokemonNames() {};
+function getAllPokemonNames(pokemon) {
+  let pokemonNames = [];
+  for(let poke of pokemon) {
+    pokemonNames.push(poke.name);
+  }
+  return pokemonNames;
+};
 
 /**
  * getHighestAttackStatScore()
@@ -50,7 +56,24 @@ function getAllPokemonNames() {};
  *  getHighestAttackStatScore(pokemon);
  *  //> 134
  */
-function getHighestAttackStatScore() {};
+function getHighestAttackStatScore(pokemon) {
+  //Return highest attack score.
+  //Located in pokemon.stats array of objects.
+  //Isolate the object element with 'attack' as the category, so we can only return the value associated with it.
+  //If the pokemon does not exist then the stat score is 0.
+  if(!pokemon || pokemon.length === 0) {
+    return 0;
+  };
+
+  let attackStat = 0;
+
+  for(let i = 0; i < pokemon.length; i++) {
+    if(pokemon[i].stats[2].value > attackStat) {
+      attackStat = pokemon[i].stats[2].value;
+    } 
+  }
+  return attackStat;
+};
 
 /**
  * getAverageTotalStatScore()
@@ -63,7 +86,20 @@ function getHighestAttackStatScore() {};
  *  getAverageTotalStatScore(pokemon);
  *  //> 407.22
  */
-function getAverageTotalStatScore() {}
+function getAverageTotalStatScore(pokemon) {
+  if(!pokemon || pokemon.length === 0) {
+    return 0;
+  };
+
+  let sumOfTotalStats = 0;
+  let averageTotalStats = 0;
+
+  for(let poke of pokemon) {
+    sumOfTotalStats += poke.stats[0].value;
+    averageTotalStats = sumOfTotalStats / pokemon.length;
+  }
+  return averageTotalStats;
+};
 
 
 module.exports = {
